@@ -131,7 +131,7 @@ const httpServer = http.createServer(async (req, res) => {
   }
 
   if (req.method === "POST" && req.url === "/mcp") {
-    const transport = new StreamableHTTPServerTransport({ sessionIdGenerator: undefined });
+    const transport = new StreamableHTTPServerTransport({ sessionIdGenerator: () => Math.random().toString(36).slice(2) });
     await server.connect(transport);
     await transport.handleRequest(req, res);
     return;
